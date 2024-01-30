@@ -1,21 +1,20 @@
 import React from 'react';
+import Guess from '../Guess/Guess';
+import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
+import { padGuesses } from './GuessList.helpers';
 
-function GuessList({ guesses }) {
-	if (guesses.length === 0) {
-		return null;
-	}
-
+function GuessList({ guesses, answer }) {
 	return (
 		<div 
 			className = "guess-results"
 		>
-			{guesses.map(guess => (
-				<p 
-					key = {guess.id}
-					className = "guess"
+			{padGuesses(guesses, NUM_OF_GUESSES_ALLOWED).map((guess, guessIdx) => (
+				<Guess 
+					key = {guessIdx}
+					answer = {answer}
 				>
-					{guess.value}
-				</p>
+					{guess}
+				</Guess>
 			))}
 		</div>
 	);
